@@ -412,11 +412,8 @@ NOVADESK_ADDON_INIT(ctx, hMsgWnd, host)
     novadesk::Addon addon(ctx, host);
     addon.RegisterString("name", "Hotkey");
     addon.RegisterString("version", "1.0.0");
-
-    addon.RegisterObject("hotkey", [](novadesk::Addon &obj) {
-        obj.RegisterFunction("register", JsHotkeyRegister, 2);
-        obj.RegisterFunction("unregister", JsHotkeyUnregister, 1);
-    });
+    addon.RegisterFunction("register", JsHotkeyRegister, 2);
+    addon.RegisterFunction("unregister", JsHotkeyUnregister, 1);
 }
 
 NOVADESK_ADDON_UNLOAD()

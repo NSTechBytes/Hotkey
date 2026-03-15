@@ -8,7 +8,7 @@ function loadHotkeyAddon() {
 
   try {
     var a = addon.load(debugPath);
-    if (a && a.hotkey && typeof a.hotkey.register === "function") {
+    if (a && typeof a.register === "function") {
       console.log("[INFO] Loaded Hotkey addon (Debug): " + debugPath);
       return a;
     }
@@ -18,7 +18,7 @@ function loadHotkeyAddon() {
 
   try {
     var b = addon.load(releasePath);
-    if (b && b.hotkey && typeof b.hotkey.register === "function") {
+    if (b && typeof b.register === "function") {
       console.log("[INFO] Loaded Hotkey addon (Release): " + releasePath);
       return b;
     }
@@ -31,16 +31,16 @@ function loadHotkeyAddon() {
 
 const hotkeyAddon = loadHotkeyAddon();
 if (!hotkeyAddon) {
-  console.error("[FAIL] Hotkey addon not loaded or missing hotkey.register");
+  console.error("[FAIL] Hotkey addon not loaded or missing register()");
   app.exit();
 }
 
-const hotkeyId = hotkeyAddon.hotkey.register("CTRL+SHIFT+M", {
+const hotkeyId = hotkeyAddon.register("CTRL+SHIFT+M", {
   onKeyDown: function () { console.log("CTRL+SHIFT+M down"); },
   onKeyUp: function () { console.log("CTRL+SHIFT+M up"); }
 });
 
-const spaceId = hotkeyAddon.hotkey.register("CTRL+SHIFT+SPACE", {
+const spaceId = hotkeyAddon.register("CTRL+SHIFT+SPACE", {
   onKeyDown: function () { console.log("CTRL+SHIFT+SPACE down"); },
   onKeyUp: function () { console.log("CTRL+SHIFT+SPACE up"); }
 });
@@ -48,8 +48,8 @@ const spaceId = hotkeyAddon.hotkey.register("CTRL+SHIFT+SPACE", {
 console.log("Registered ids:", hotkeyId, spaceId);
 
 // setTimeout(function () {
-//   hotkeyAddon.hotkey.unregister(hotkeyId);
-//   hotkeyAddon.hotkey.unregister(spaceId);
+//   hotkeyAddon.unregister(hotkeyId);
+//   hotkeyAddon.unregister(spaceId);
 //   console.log("Hotkeys unregistered");
 //   app.exit();
 // }, 5000);
