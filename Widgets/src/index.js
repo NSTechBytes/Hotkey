@@ -6,7 +6,7 @@ const widget = new widgetWindow({
 });
 
 const hotkeyAddon = addon.load(
-  "D:\\Novadesk-Project\\Hotkey\\dist\\x64\\Debug\\Hotkey\\Hotkey.dll"
+  "addon\\Hotkey.dll"
 );
 
 const w_hotkey = hotkeyAddon.register("W", {
